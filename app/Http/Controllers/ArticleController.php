@@ -7,9 +7,7 @@ use Illuminate\Http\Request;
 
 class ArticleController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
+    
     public function index()
     {
        try {
@@ -20,9 +18,7 @@ class ArticleController extends Controller
        }
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
+   
     public function store(Request $request)
     {
         try {
@@ -42,9 +38,7 @@ class ArticleController extends Controller
         }
     }
 
-    /**
-     * Display the specified resource.
-     */
+    
     public function show($id)
     {
         try {
@@ -56,9 +50,7 @@ class ArticleController extends Controller
         }
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
+   
     public function update(Request $request, $id)
     {
        try {
@@ -70,9 +62,7 @@ class ArticleController extends Controller
        }
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
+    
     public function destroy($id)
     {
         try {
@@ -87,14 +77,12 @@ class ArticleController extends Controller
     {
 
         try {
-           $perPage = request()->input('pageSize', 10); 
-              // Récupère la valeur dynamique pour la pagination
+           $perPage = request()->input('pageSize', 20); 
             $articles = Article::with('scategorie')->paginate($perPage);
   
-            // Retourne le résultat en format JSON API
             return response()->json([
-            'products' => $articles->items(), // Les articles paginés
-            'totalPages' =>  $articles->lastPage(), // Le nombre de pages
+            'products' => $articles->items(), 
+            'totalPages' =>  $articles->lastPage(), 
           ]);
         } catch (\Exception $e) {
             return response()->json("Selection impossible {$e->getMessage()}");
